@@ -68,6 +68,11 @@ const AnimatedTextInput = ({
     setInputFocus(true);
     if (!showInput) {
       startAnimation();
+      if(innerRef.current.focus){
+        innerRef.current.focus()
+      }else{
+        innerRef.current._inputElement.focus()
+      }
     }
   };
 
@@ -152,7 +157,6 @@ const AnimatedTextInput = ({
           >
             {placeholder}
           </Animated.Text>
-          {showInput && (
             <View style={styles.toucheableLineContent}>
               <>{prefix}</>
               {!!mask ? (
@@ -161,7 +165,6 @@ const AnimatedTextInput = ({
                   value={value}
                   pointerEvents={disabled ? "box-none" : "auto"}
                   selectionColor={selectionColor}
-                  autoFocus
                   blurOnSubmit
                   editable={!disabled}
                   onBlur={() => onBlur()}
@@ -184,7 +187,6 @@ const AnimatedTextInput = ({
                   value={value}
                   pointerEvents={disabled ? "box-none" : "auto"}
                   selectionColor={selectionColor}
-                  autoFocus
                   blurOnSubmit
                   editable={!disabled}
                   onBlur={() => onBlur()}
@@ -194,7 +196,6 @@ const AnimatedTextInput = ({
                 />
               )}
             </View>
-          )}
         </View>
         <View style={styles.sufix}>{sufix}</View>
       </Animated.View>
